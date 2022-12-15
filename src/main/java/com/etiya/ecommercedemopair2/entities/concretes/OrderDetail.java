@@ -41,5 +41,5 @@ public class OrderDetail {
 
     @OneToOne(mappedBy = "orderDetail")
     @JsonIgnore
-    private List<Invoice> invoices;
+    private Invoice invoices;
 }

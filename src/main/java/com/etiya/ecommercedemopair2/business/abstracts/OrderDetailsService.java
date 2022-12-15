@@ -11,5 +11,7 @@ import org.springframework.data.domain.Pageable;
 public interface OrderDetailsService {
     DataResult<AddOrderDetailsResponse> addOrderDetails(AddOrderDetailsRequest addOrderDetailsRequest);
 
+    DataResult<AddOrderDetailsResponse> addOrderDetailsWithTransaction(AddOrderDetailsRequest addOrderDetailsRequest);
+
     Page<OrderDetail> findAllWithPagination(Pageable pageable);
 }

@@ -1,5 +1,6 @@
 package com.etiya.ecommercedemopair2.business.concretes;
 
+import com.etiya.ecommercedemopair2.business.abstracts.InvoiceService;
 import com.etiya.ecommercedemopair2.business.abstracts.OrderDetailsService;
 import com.etiya.ecommercedemopair2.business.abstracts.OrderService;
 import com.etiya.ecommercedemopair2.business.abstracts.ProductService;
@@ -11,6 +12,7 @@ import com.etiya.ecommercedemopair2.core.util.results.SuccessDataResult;
 import com.etiya.ecommercedemopair2.entities.concretes.Order;
 import com.etiya.ecommercedemopair2.entities.concretes.OrderDetail;
 import com.etiya.ecommercedemopair2.entities.concretes.Product;
+import com.etiya.ecommercedemopair2.repository.abstracts.InvoiceRepository;
 import com.etiya.ecommercedemopair2.repository.abstracts.OrderDetailsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,10 +25,12 @@ public class OrderDetailsManager implements OrderDetailsService {
     private OrderDetailsRepository orderDetailsRepository;
     private OrderService orderService;
     private ProductService productService;
+    private InvoiceService invoiceService;
+    private InvoiceRepository invoiceRepository;
     private ModelMapperService modelMapperService;
     @Override
     public DataResult<AddOrderDetailsResponse> addOrderDetails(AddOrderDetailsRequest addOrderDetailsRequest) {
-       OrderDetail orderDetail=modelMapperService.forRequest().map(addOrderDetailsRequest,OrderDetail.class);
+        OrderDetail orderDetail=modelMapperService.forRequest().map(addOrderDetailsRequest,OrderDetail.class);
 
         OrderDetail savedOrderDetail = orderDetailsRepository.save(orderDetail);
 
@@ -34,6 +38,21 @@ public class OrderDetailsManager implements OrderDetailsService {
                 modelMapperService.forResponse().map(savedOrderDetail,AddOrderDetailsResponse.class);
         return new SuccessDataResult<AddOrderDetailsResponse>(response,"Sipariş Detayı Eklendi.");
     }
+
+    @Override
+    public DataResult<AddOrderDetailsResponse> addOrderDetailsWithTransaction(AddOrderDetailsRequest addOrderDetailsRequest) {
+        return null;
+    }
+
+//    public DataResult<AddOrderDetailsResponse> addOrderDetailsWithTransaction(AddOrderDetailsRequest addOrderDetailsRequest) {
+//        OrderDetail orderDetail;
+//
+//        OrderDetail savedOrderDetail = orderDetailsRepository.save(orderDetail);
+//
+//        AddOrderDetailsResponse response=
+//                modelMapperService.forResponse().map(savedOrderDetail,AddOrderDetailsResponse.class);
+//        return new SuccessDataResult<AddOrderDetailsResponse>(response,"Sipariş Detayı Eklendi.");
+//    }
 
     @Override
     public Page<OrderDetail> findAllWithPagination(Pageable pageable) {

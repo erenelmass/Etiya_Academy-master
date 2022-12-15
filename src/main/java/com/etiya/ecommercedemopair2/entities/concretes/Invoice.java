@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -25,10 +26,10 @@ public class Invoice {
     private String invoiceID;
 
     @Column(name="date")
-    private String invoiceDate;
+    private Date invoiceDate;
 
     @Column(name="total")
-    private int total;
+    private double total;
 
     @JsonIgnore
     @OneToOne

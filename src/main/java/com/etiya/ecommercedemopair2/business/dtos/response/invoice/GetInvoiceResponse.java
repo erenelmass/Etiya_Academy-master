@@ -12,6 +12,6 @@ import java.util.Date;
 public class GetInvoiceResponse {
     private String invoiceId;
     private Date invoiceDate;
-    private int total;
+    private double total;
     private int orderDetailsId;
 }
